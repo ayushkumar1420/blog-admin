@@ -83,6 +83,7 @@ $excerpt = (string) ($currentPost['excerpt'] ?? '');
 $content = (string) ($currentPost['content'] ?? '');
 $status = (string) ($currentPost['status'] ?? 'draft');
 $featuredImage = (string) ($currentPost['featured_image'] ?? '');
+$featuredImageAlt = (string) ($currentPost['image_alt'] ?? '');
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -92,6 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $excerpt = trim((string) ($_POST['excerpt'] ?? ''));
     $content = makeContentLinksBlue(trim((string) ($_POST['content'] ?? '')));
     $status = (string) ($_POST['status'] ?? 'draft');
+    $featuredImageAlt = trim((string) ($_POST['image_alt'] ?? ''));
 
     if (!verifyCsrfToken()) {
         $error = 'Invalid request. Please refresh and try again.';
@@ -185,6 +187,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $post['content'] = $content;
                         $post['status'] = $status;
                         $post['featured_image'] = $newImagePath;
+                        $post['image_alt'] = $featuredImageAlt;
                         $post['updated_at'] = $now;
 
                         $posts[$existingIndex] = $post;
@@ -198,6 +201,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             'content' => $content,
                             'status' => $status,
                             'featured_image' => $newImagePath,
+                            'image_alt' => $featuredImageAlt,
                             'created_at' => $now,
                             'updated_at' => $now,
                         ];
