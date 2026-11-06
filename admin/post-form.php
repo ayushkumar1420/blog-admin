@@ -442,7 +442,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div style="margin-bottom: 12px;">
             <img
                 src="<?= e(BASE_URL . '/' . $featuredImage) ?>"
-                alt="Current featured image"
+                alt="<?= e($featuredImageAlt !== '' ? $featuredImageAlt : $title) ?>"
                 style="width:180px;max-height:140px;object-fit:cover;border-radius:8px;"
             >
         </div>
@@ -456,6 +456,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     >
 
     <small>JPG, PNG, or WebP. Maximum size: 3 MB.</small>
+
+    <!-- //alt text input -->
+    <div style="margin-top: 15px;">
+    <label for="image_alt">Image Alt Text</label>
+
+    <input
+        type="text"
+        id="image_alt"
+        name="image_alt"
+        value="<?= e($featuredImageAlt ?? '') ?>"
+        maxlength="250"
+        placeholder="Describe the featured image for SEO and accessibility"
+    >
+
+    <small>
+        Describe what is visible in the image. Keep it short and meaningful.
+    </small>
+</div>
 </div>
 
                     
