@@ -5,9 +5,10 @@ session_start();
 
 define('BASE_PATH', dirname(__DIR__));
 define('DATA_PATH', BASE_PATH . '/data');
-define('POSTS_FILE', DATA_PATH . '/posts.json');
+define('POSTS_FILE', 'C:\\xampp\\htdocs\\DeepshiTech2026FinalSite\\blog-cms-staging\\deepshitech-blog-admin\\data\\posts.json');
 define('USERS_FILE', DATA_PATH . '/users.json');
 define('UPLOAD_PATH', BASE_PATH . '/images/blog');
+define('PUBLIC_UPLOAD_PATH', 'C:\\xampp\\htdocs\\DeepshiTech2026FinalSite\\blog-cms-staging\\deepshitech-blog-admin\\images\\blog');
 
 define('BASE_URL', '/deepshitech-blog-admin');
 

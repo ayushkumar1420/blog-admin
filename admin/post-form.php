@@ -137,9 +137,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     } elseif ($file['size'] > 3 * 1024 * 1024) {
                         $error = 'Image must be 3 MB or smaller.';
                     } else {
-                        $finfo = new finfo(FILEINFO_MIME_TYPE);
-                        $mimeType = $finfo->file($file['tmp_name']);
-
+                        $imageDetails = @getimagesize($file['tmp_name']);
+                        $mimeType = is_array($imageDetails)
+                            ? ($imageDetails['mime'] ?? '')
+                            : '';
                         $allowedTypes = [
                             'image/jpeg' => 'jpg',
                             'image/png' => 'png',
@@ -165,7 +166,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     $file['tmp_name'],
                                     UPLOAD_PATH . '/' . $filename
                                 )) {
-                                    $newImagePath = 'images/blog/' . $filename;
+                                    if (
+                                        !is_dir(PUBLIC_UPLOAD_PATH)
+                                        && !mkdir(PUBLIC_UPLOAD_PATH, 0755, true)
+                                        && !is_dir(PUBLIC_UPLOAD_PATH)
+                                    ) {
+                                        $error = 'Could not create the public blog image folder.';
+                                    } elseif (!copy(
+                                        UPLOAD_PATH . '/' . $filename,
+                                        PUBLIC_UPLOAD_PATH . '/' . $filename
+                                    )) {
+                                        $error = 'Could not publish the uploaded image to the main site.';
+                                    } else {
+                                        $newImagePath = 'images/blog/' . $filename;
+                                    }
                                 } else {
                                     $error = 'Could not save the uploaded image.';
                                 }
