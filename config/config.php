@@ -97,7 +97,7 @@ function e(string $value): string
 /**
  * Check whether the current user is logged in.
  */
-function isLoggedIn(): bool
+function isLoggedIn(): bool 
 {
     return isset($_SESSION['admin_id'], $_SESSION['admin_role']);
 }

@@ -526,58 +526,90 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
     }
 
-    if (typeof quillBetterTable !== 'undefined') {
-    Quill.register({
-        'modules/better-table': quillBetterTable
-    }, true);
+    
+// Register Better Table plugin
+if (typeof quillBetterTable === 'undefined') {
+    console.error('Quill Better Table plugin is not available.');
+    alert('Table plugin is not loaded. Check browser console.');
+    return;
 }
 
-    const toolbarOptions = [
-        [{ header: [1, 2, 3, false] }],
-        ['bold', 'italic', 'underline', 'strike'],
-        [{ list: 'ordered' }, { list: 'bullet' }],
-        ['blockquote', 'link', 'table'],
-        ['clean']
-    ];
+Quill.register({
+    'modules/better-table': quillBetterTable
+}, true);
 
-    const quill = new Quill('#editor', {
-        theme: 'snow',
-        placeholder: 'Write your blog content here...',
-        modules: {
-            toolbar: toolbarOptions,
-            table: false,
-            ...(typeof QuillBetterTable !== 'undefined' ? {
-                'better-table': {
-                    operationMenu: {
-                        items: {
-                            unmergeCells: { text: 'Unmerge cells' }
-                        }
+const toolbarOptions = [
+    [{ header: [1, 2, 3, false] }],
+    ['bold', 'italic', 'underline', 'strike'],
+    [{ list: 'ordered' }, { list: 'bullet' }],
+    ['blockquote', 'link', 'table'],
+    ['clean']
+];
+
+// Initialize Quill
+const quill = new Quill('#editor', {
+    theme: 'snow',
+    placeholder: 'Write your blog content here...',
+    modules: {
+        table: false,
+        toolbar: toolbarOptions,
+
+        'better-table': {
+            operationMenu: {
+                items: {
+                    unmergeCells: {
+                        text: 'Unmerge cells'
                     }
-                },
-                keyboard: {
-                    bindings: quillBetterTable.keyboardBindings
                 }
-            } : {})
+            }
+        },
+
+        keyboard: {
+            bindings: quillBetterTable.keyboardBindings
         }
-    });
+    }
+});
 
-    const toolbar = quill.getModule('toolbar');
-    toolbar?.addHandler('table', function () {
-        const tableModule = quill.getModule('better-table');
 
-        if (!tableModule) {
-            alert('Table support could not be loaded. Please refresh and try again.');
-            return;
-        }
+    
+const toolbar = quill.getModule('toolbar');
 
-        const rows = Number.parseInt(prompt('Number of rows:', '3') ?? '', 10);
-        const columns = Number.parseInt(prompt('Number of columns:', '3') ?? '', 10);
 
-        if (Number.isInteger(rows) && Number.isInteger(columns)
-            && rows > 0 && rows <= 20 && columns > 0 && columns <= 10) {
-            tableModule.insertTable(rows, columns);
-        }
-    });
+toolbar.addHandler('table', function () {
+    const tableModule = quill.getModule('better-table');
+
+    if (!tableModule) {
+        alert('Table module not initialized.');
+        return;
+    }
+
+    const rowInput = prompt('Enter number of rows:', '5');
+    if (rowInput === null) return;
+
+    const columnInput = prompt('Enter number of columns:', '5');
+    if (columnInput === null) return;
+
+    const rows = Number(rowInput.trim());
+    const columns = Number(columnInput.trim());
+
+    console.log('Rows entered:', rows);
+    console.log('Columns entered:', columns);
+
+    if (
+        !Number.isInteger(rows) ||
+        !Number.isInteger(columns) ||
+        rows < 1 || rows > 50 ||
+        columns < 1 || columns > 20
+    ) {
+        alert('Enter rows between 1-50 and columns between 1-20.');
+        return;
+    }
+
+    console.log('Inserting table:', rows, 'x', columns);
+
+    tableModule.insertTable(rows, columns);
+});
+
 
     form.addEventListener('submit', function (event) {
         const plainText = quill.getText().trim();
