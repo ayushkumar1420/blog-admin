@@ -245,7 +245,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $isEditing ? 'Edit Blog' : 'Create Blog' ?> | Deepshitech</title>
     <link rel="stylesheet" href="<?= e(BASE_URL) ?>/assets/admin.css">
-    <link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/quill/2.0.0-dev.3/quill.snow.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/quill-better-table@1.2.10/dist/quill-better-table.css" rel="stylesheet">
     <style>
         .form-card {
@@ -514,7 +514,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </section>
     </main>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/quill/2.0.0-dev.3/quill.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/quill-better-table@1.2.10/dist/quill-better-table.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -526,9 +526,11 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
     }
 
-    if (typeof QuillBetterTable !== 'undefined') {
-        Quill.register({ 'modules/better-table': QuillBetterTable }, true);
-    }
+    if (typeof quillBetterTable !== 'undefined') {
+    Quill.register({
+        'modules/better-table': quillBetterTable
+    }, true);
+}
 
     const toolbarOptions = [
         [{ header: [1, 2, 3, false] }],
@@ -543,6 +545,7 @@ document.addEventListener('DOMContentLoaded', function () {
         placeholder: 'Write your blog content here...',
         modules: {
             toolbar: toolbarOptions,
+            table: false,
             ...(typeof QuillBetterTable !== 'undefined' ? {
                 'better-table': {
                     operationMenu: {
@@ -552,7 +555,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 },
                 keyboard: {
-                    bindings: QuillBetterTable.keyboardBindings
+                    bindings: quillBetterTable.keyboardBindings
                 }
             } : {})
         }
