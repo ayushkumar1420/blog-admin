@@ -10,7 +10,7 @@ define('USERS_FILE', DATA_PATH . '/users.json');
 define('UPLOAD_PATH', BASE_PATH . '/images/blog');
 define('PUBLIC_UPLOAD_PATH', 'C:\\xampp\\htdocs\\DeepshiTech2026FinalSite\\blog-cms-staging\\deepshitech-blog-admin\\images\\blog');
 
-define('BASE_URL', '/deepshitech-blog-admin');
+define('BASE_URL', '/DeepshiTech2026FinalSite/blog-cms-staging/deepshitech-blog-admin');
 
 date_default_timezone_set('Asia/Kolkata');
 /**
