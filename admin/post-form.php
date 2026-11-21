@@ -202,6 +202,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         $post['title'] = $title;
                         $post['slug'] = $slug;
+                        $post['seo_title'] = $seoTitle;
+                        $post['meta_description'] = $metaDescription;
+                        $post['canonical_url'] = $canonicalUrl;
                         $post['category'] = $category;
                         $post['excerpt'] = $excerpt;
                         $post['content'] = $content;
