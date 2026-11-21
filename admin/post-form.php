@@ -450,6 +450,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         
 
                     </div>
+                    
+<!-- //Admin form fields -->
+<div class="field">
+    <label for="seo_title">SEO Title</label>
+    <input
+        type="text"
+        id="seo_title"
+        name="seo_title"
+        maxlength="70"
+        value="<?= e($seoTitle) ?>"
+        placeholder="Enter SEO title">
+    <small>Recommended: 50–60 characters.</small>
+</div>
+
+<div class="field">
+    <label for="meta_description">Meta Description</label>
+    <textarea
+        id="meta_description"
+        name="meta_description"
+        maxlength="160"
+        rows="3"
+        placeholder="Write a description for search engines"><?= e($metaDescription) ?></textarea>
+    <small>Recommended: 140–160 characters.</small>
+</div>
+
+<div class="field">
+    <label for="canonical_url">Canonical URL</label>
+    <input
+        type="url"
+        id="canonical_url"
+        name="canonical_url"
+        maxlength="500"
+        value="<?= e($canonicalUrl) ?>"
+        placeholder="https://www.deepshitech.com/blog/example">
+    <small>Leave blank to use the blog's own URL.</small>
+</div>
 
                     <div class="field">
                         <label for="excerpt">Short Excerpt</label>
