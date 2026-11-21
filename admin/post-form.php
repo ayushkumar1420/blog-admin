@@ -97,6 +97,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $content = makeContentLinksBlue(trim((string) ($_POST['content'] ?? '')));
     $status = (string) ($_POST['status'] ?? 'draft');
     $featuredImageAlt = trim((string) ($_POST['image_alt'] ?? ''));
+    $seoTitle = trim((string) ($_POST['seo_title'] ?? ''));
+    $metaDescription = trim((string) ($_POST['meta_description'] ?? ''));
+    $canonicalUrl = trim((string) ($_POST['canonical_url'] ?? ''));
 
     if (!verifyCsrfToken()) {
         $error = 'Invalid request. Please refresh and try again.';
