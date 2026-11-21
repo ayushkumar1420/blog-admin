@@ -76,6 +76,9 @@ function makeContentLinksBlue(string $html): string
 
 $currentPost = $isEditing ? $posts[$existingIndex] : [];
 
+$seoTitle = (string) ($currentPost['seo_title'] ?? '');
+$metaDescription = (string) ($currentPost['meta_description'] ?? '');
+$canonicalUrl = (string) ($currentPost['canonical_url'] ?? '');
 $title = (string) ($currentPost['title'] ?? '');
 $slug = (string) ($currentPost['slug'] ?? '');
 $category = (string) ($currentPost['category'] ?? '');
