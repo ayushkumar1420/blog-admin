@@ -373,9 +373,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </nav>
 
         <div class="sidebar-bottom">
-            <div class="admin-avatar">
-                <?= e(strtoupper(substr((string) ($_SESSION['admin_username'] ?? 'A'), 0, 1))) ?>
-            </div>
+<div class="admin-avatar">
+    <img src="<?= e(BASE_URL) ?>/img/logo.png" alt="DeepshiTech Logo">
+</div>
             <div class="admin-details">
                 <strong><?= e((string) ($_SESSION['admin_username'] ?? 'Admin')) ?></strong>
                 <small><?= e(ucfirst((string) ($_SESSION['admin_role'] ?? 'editor'))) ?></small>
@@ -396,10 +396,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="topbar-right">
                 <span class="status-indicator"></span>
                 <span class="admin-label">Admin Panel</span>
-                <div class="topbar-avatar">
-                    <?= e(strtoupper(substr((string) ($_SESSION['admin_username'] ?? 'A'), 0, 1))) ?>
-                </div>
-                <a class="logout-link" href="<?= e(BASE_URL) ?>/admin/logout.php">Logout</a>
+<div class="topbar-avatar">
+    <img src="<?= e(BASE_URL) ?>/img/logo.png" alt="DeepshiTech Logo">
+</div>            
+   <a class="logout-link" href="<?= e(BASE_URL) ?>/admin/logout.php">Logout</a>
             </div>
         </header>
 
